@@ -17,6 +17,7 @@ public class Activity implements Serializable {
 	private LocalDateTime end;
 	@Inject
 	private Project project;
+	private Worker performer;
 	private String description;
 
 	// getter and setters
@@ -43,6 +44,14 @@ public class Activity implements Serializable {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public Worker getPerformer() {
+		return performer;
+	}
+
+	public void setPerformer(Worker performer) {
+		this.performer = performer;
 	}
 
 	public String getDescription() {
