@@ -16,13 +16,13 @@ import be.abis.casebce.model.Worker;
  */
 @Stateful
 public class ActivitySession implements ActivitySessionRemote {
-	
+
 	private List<Activity> activities;
 
-    /**
-     * Default constructor. 
-     */
-    public ActivitySession() {
+	/**
+	 * Default constructor.
+	 */
+	public ActivitySession() {
 		activities = new ArrayList<Activity>();
 		Activity activity = new Activity();
 		activity.setPerformer(new Worker());
@@ -38,7 +38,7 @@ public class ActivitySession implements ActivitySessionRemote {
 		activities.add(activity);
 		activity = new Activity();
 		activity.setPerformer(new Worker());
-		activity.getPerformer().setLogin("AnotherAwesomeWorker");
+		activity.getPerformer().setLogin("AwesomeWorker");
 		activity.setProject(new Project());
 		activity.getProject().setName("Another awesome Project");
 		activity.getProject().setDescription("This project is also awesome!");
@@ -48,23 +48,36 @@ public class ActivitySession implements ActivitySessionRemote {
 		activity.setStart(LocalDateTime.now().minusHours(1));
 		activity.setEnd(LocalDateTime.now());
 		activities.add(activity);
-    }
+	}
 
 	@Override
 	public List<Activity> getActivities(Worker performer) {
-		return activities;
+		List<Activity> performerActivities = new ArrayList<Activity>();
+		activities.forEach(a -> {
+			if (a.getPerformer().getLogin().equals(performer.getLogin())) {
+				performerActivities.add(a);
+			}
+		});
+		return performerActivities;
 	}
 
 	@Override
-	public boolean updateActivity(Activity activity) {
-		// TODO Auto-generated method stub
-		return true;
+	public Activity updateActivity(Activity activity) {
+		for (int i = 0; i < activities.size(); i++) {
+			if (activities.get(i).hashCode() == activity.hashCode()) {
+				activities.set(i, activity);
+				System.out.println("Activity updated");
+				return activity;
+			}
+		}
+		System.out.println("Activity update failed");
+		return null;
 	}
 
 	@Override
-	public boolean createActivity(Activity activity) {
-		// TODO Auto-generated method stub
-		return true;
+	public Activity createActivity(Activity activity) {
+		activities.add(activity);
+		return activity;
 	}
 
 }

@@ -10,6 +10,8 @@ import be.abis.casebce.model.Worker;
 @Remote
 public interface ActivitySessionRemote {
 	public List<Activity> getActivities(Worker performer);
-	public boolean updateActivity(Activity activity);
-	public boolean createActivity(Activity activity);
+
+	public Activity updateActivity(Activity activity);
+
+	public Activity createActivity(Activity activity);
 }
