@@ -3,8 +3,9 @@ package be.abis.casebce.session;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 
 import be.abis.casebce.model.Activity;
 import be.abis.casebce.model.Company;
@@ -14,7 +15,7 @@ import be.abis.casebce.model.Worker;
 /**
  * Session Bean implementation class ActivitySession
  */
-@Stateful
+@Stateless
 public class ActivitySession implements ActivitySessionRemote {
 
 	private List<Activity> activities;
@@ -53,11 +54,14 @@ public class ActivitySession implements ActivitySessionRemote {
 	@Override
 	public List<Activity> getActivities(Worker performer) {
 		List<Activity> performerActivities = new ArrayList<Activity>();
-		activities.forEach(a -> {
-			if (a.getPerformer().getLogin().equals(performer.getLogin())) {
-				performerActivities.add(a);
-			}
-		});
+		try {
+			performerActivities = activities.stream()
+					// .filter(a->
+					// a.getPerformer().getLogin().equals(performer.getLogin()))
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return performerActivities;
 	}
 
