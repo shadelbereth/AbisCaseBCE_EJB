@@ -14,4 +14,6 @@ public interface ActivitySessionRemote {
 	public Activity updateActivity(Activity activity);
 
 	public Activity createActivity(Activity activity);
+	
+	public Activity reuploadActivity(Activity activity);
 }

@@ -67,20 +67,19 @@ public class ActivitySession implements ActivitySessionRemote {
 
 	@Override
 	public Activity updateActivity(Activity activity) {
-		for (int i = 0; i < activities.size(); i++) {
-			if (activities.get(i).hashCode() == activity.hashCode()) {
-				activities.set(i, activity);
-				System.out.println("Activity updated");
-				return activity;
-			}
-		}
-		System.out.println("Activity update failed");
-		return null;
+		System.out.println("Activity updated");
+		return activity;
 	}
 
 	@Override
 	public Activity createActivity(Activity activity) {
 		activities.add(activity);
+		return activity;
+	}
+
+	@Override
+	public Activity reuploadActivity(Activity activity) {
+		System.out.println("Reupload activity");
 		return activity;
 	}
 
