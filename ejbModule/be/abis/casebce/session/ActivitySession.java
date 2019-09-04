@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 import be.abis.casebce.model.Activity;
 import be.abis.casebce.model.Company;
@@ -81,6 +85,28 @@ public class ActivitySession implements ActivitySessionRemote {
 	public Activity reuploadActivity(Activity activity) {
 		System.out.println("Reupload activity");
 		return activity;
+	}
+
+	@Override
+	public void test() {
+		try {
+			Class c = Class.forName("org.apache.openjpa.persistence.PersistenceProviderImpl");
+			System.out.println(c);
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("CaseBCE");
+			EntityManager em = emf.createEntityManager();
+			EntityTransaction tx = em.getTransaction();
+
+			tx.begin();
+			Company company = new Company();
+			company.setName("Awesome Company");
+			em.persist(company);
+			tx.commit();
+
+			em.close();
+			emf.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
