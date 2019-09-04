@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
@@ -16,7 +18,8 @@ import javax.persistence.Table;
 @SessionScoped
 public class Project implements Serializable {
 
-	// fields
+	@Id
+	@GeneratedValue
 	@Column(name = "id")
 	private int projectId;
 	@Column(name = "name")
