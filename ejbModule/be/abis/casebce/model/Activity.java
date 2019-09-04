@@ -7,18 +7,29 @@ import java.util.Date;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Activity")
 @Named
 @SessionScoped
 public class Activity implements Serializable {
 
 	// fields
+	@Column(name = "id")
+	private int activityId;
+	@Column(name = "start")
 	private LocalDateTime start;
+	@Column(name = "end")
 	private LocalDateTime end;
+	@Column(name = "description")
+	private String description;
+
 	@Inject
 	private Project project;
 	private Worker performer;
-	private String description;
 
 	// getter and setters
 
@@ -60,6 +71,14 @@ public class Activity implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getActivityId() {
+		return activityId;
+	}
+
+	public void setActivityId(int activityId) {
+		this.activityId = activityId;
 	}
 
 }
