@@ -5,19 +5,32 @@ import java.io.Serializable;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Project")
 @Named
 @SessionScoped
 public class Project implements Serializable {
 
 	// fields
+	@Column(name = "id")
+	private int projectId;
+	@Column(name = "name")
+	private String name;
+	@Column(name = "description")
+	private String description;
+	@JoinColumn(name = "CompanyId")
+	private int companyId;
+
 	@Inject
 	private Company client;
 	@Inject
 	private Manager manager;
-	private String name;
 	private double hourRate;
-	private String description;
 
 	// getters and setters
 	public Company getClient() {
@@ -58,6 +71,22 @@ public class Project implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
+
+	public int getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 
 	@Override
