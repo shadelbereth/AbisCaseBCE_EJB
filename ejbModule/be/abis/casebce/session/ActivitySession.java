@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import be.abis.casebce.model.Activity;
 import be.abis.casebce.model.Company;
@@ -23,6 +24,8 @@ import be.abis.casebce.model.Worker;
 public class ActivitySession implements ActivitySessionRemote {
 
 	private List<Activity> activities;
+	@PersistenceContext(unitName = "CaseBCE")
+	private EntityManager em;
 
 	/**
 	 * Default constructor.
@@ -90,20 +93,9 @@ public class ActivitySession implements ActivitySessionRemote {
 	@Override
 	public void test() {
 		try {
-			Class c = Class.forName("org.apache.openjpa.persistence.PersistenceProviderImpl");
-			System.out.println(c);
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("CaseBCE");
-			EntityManager em = emf.createEntityManager();
-			EntityTransaction tx = em.getTransaction();
-
-			tx.begin();
 			Company company = new Company();
 			company.setName("Awesome Company");
 			em.persist(company);
-			tx.commit();
-
-			em.close();
-			emf.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
