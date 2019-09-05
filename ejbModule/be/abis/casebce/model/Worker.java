@@ -27,35 +27,43 @@ public class Worker implements Serializable {
 	private String firstName;
 	@Column(name = "lastName")
 	private String lastName;
+
 	/*
-	private String bankAcount;
-	@Inject
-	private Address address;
-	private String password;
-*/
+	 * 
+	 * private String bankAcount;
+	 * 
+	 * @Inject private Address address; private String password;
+	 */
 	public int getPerformerId() {
 		return performerId;
 	}
+
 	public void setPerformerId(int performerId) {
 		this.performerId = performerId;
 	}
+
 	public String getLogin() {
 		return login;
 	}
+
 	public void setLogin(String login) {
 		this.login = login;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 }
