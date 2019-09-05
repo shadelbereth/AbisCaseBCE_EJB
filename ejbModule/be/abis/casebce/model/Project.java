@@ -31,8 +31,6 @@ public class Project implements Serializable {
 
 	@Inject
 	private Company client;
-	@Inject
-	private Manager manager;
 	private double hourRate;
 
 	// getters and setters
@@ -42,14 +40,6 @@ public class Project implements Serializable {
 
 	public void setClient(Company client) {
 		this.client = client;
-	}
-
-	public Manager getManager() {
-		return manager;
-	}
-
-	public void setManager(Manager manager) {
-		this.manager = manager;
 	}
 
 	public double getHourRate() {
