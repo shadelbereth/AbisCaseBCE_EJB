@@ -8,8 +8,11 @@ import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -19,19 +22,19 @@ import javax.persistence.Table;
 public class Project implements Serializable {
 
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name = "Project_Gen", sequenceName = "Project_Seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Project_Gen")
 	@Column(name = "id")
 	private int projectId;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "description")
 	private String description;
-	@JoinColumn(name = "CompanyId")
-	private int companyId;
 
 	@Inject
+	@ManyToOne
+	@JoinColumn(name = "CompanyId")
 	private Company client;
-	private double hourRate;
 
 	// getters and setters
 	public Company getClient() {
@@ -40,14 +43,6 @@ public class Project implements Serializable {
 
 	public void setClient(Company client) {
 		this.client = client;
-	}
-
-	public double getHourRate() {
-		return hourRate;
-	}
-
-	public void setHourRate(double hourRate) {
-		this.hourRate = hourRate;
 	}
 
 	public String getDescription() {
@@ -72,14 +67,6 @@ public class Project implements Serializable {
 
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
-	}
-
-	public int getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
 	}
 
 	@Override

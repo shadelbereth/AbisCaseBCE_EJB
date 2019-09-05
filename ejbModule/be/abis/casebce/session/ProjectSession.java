@@ -20,7 +20,6 @@ public class ProjectSession implements ProjectSessionRemote {
 		Company companyUno = new Company();
 		companyUno.setName("Company Uno");
 		projectUno.setClient(companyUno);
-		projectUno.setHourRate(100);
 		projectUno.setName("Project Uno");
 		projectUno.setDescription("THIS IS THE UNO PROJECT");
 
@@ -29,7 +28,6 @@ public class ProjectSession implements ProjectSessionRemote {
 		Company companyDos = new Company();
 		companyDos.setName("Company Dos");
 		projectDos.setClient(companyDos);
-		projectDos.setHourRate(200);
 		projectDos.setName("Project Dos");
 		projectDos.setDescription("THIS IS THE DOS PROJECT");
 
@@ -38,7 +36,6 @@ public class ProjectSession implements ProjectSessionRemote {
 		Company companyTres = new Company();
 		companyTres.setName("Company Tres");
 		projectTres.setClient(companyTres);
-		projectTres.setHourRate(300);
 		projectTres.setName("Project Tres");
 		projectTres.setDescription("THIS IS THE TRES PROJECT");
 
