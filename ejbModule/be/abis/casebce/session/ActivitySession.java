@@ -93,9 +93,8 @@ public class ActivitySession implements ActivitySessionRemote {
 	@Override
 	public void test() {
 		try {
-			Company company = new Company();
-			company.setName("Awesome Company");
-			em.persist(company);
+			Company company = em.find(Company.class, 1);
+			System.out.println("From DB : " + company.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

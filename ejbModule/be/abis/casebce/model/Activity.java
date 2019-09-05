@@ -27,9 +27,9 @@ public class Activity implements Serializable {
 	@GeneratedValue
 	@Column(name = "id")
 	private int activityId;
-	@Column(name = "start")
+	@Column(name = "start_time")
 	private LocalDateTime start;
-	@Column(name = "end")
+	@Column(name = "end_time")
 	private LocalDateTime end;
 	@Column(name = "description")
 	private String description;
