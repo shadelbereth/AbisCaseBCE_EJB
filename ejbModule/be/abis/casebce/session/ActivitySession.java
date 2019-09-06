@@ -60,15 +60,9 @@ public class ActivitySession implements ActivitySessionRemote {
 
 	@Override
 	public List<Activity> getActivities(Worker performer) {
-		List<Activity> performerActivities = new ArrayList<Activity>();
-		try {
-			performerActivities = activities.stream()
-					// .filter(a->
-					// a.getPerformer().getLogin().equals(performer.getLogin()))
-					.collect(Collectors.toList());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		List<Activity> performerActivities = em
+				.createQuery("Select a From Activity a Where a.performer = :performer", Activity.class)
+				.setParameter("performer", performer).getResultList();
 		return performerActivities;
 	}
 
@@ -92,15 +86,16 @@ public class ActivitySession implements ActivitySessionRemote {
 
 	@Override
 	public Activity reuploadActivity(Activity activity) {
-		System.out.println("Reupload activity");
+		activity = em.find(Activity.class, activity.getActivityId());
 		return activity;
 	}
 
 	@Override
 	public void test() {
 		try {
-			Company company = em.find(Company.class, 1);
-			System.out.println("From DB : " + company.getName());
+			Project project = em.find(Project.class, 2);
+			System.out.println(
+					project.getName() + " : " + project.getDescription() + " for " + project.getClient().getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
