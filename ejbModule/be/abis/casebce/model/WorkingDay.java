@@ -20,42 +20,37 @@ import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "WorkingDay")
+@Entity
+@Table(name = "WorkingDay")
 @Named
 @SessionScoped
 public class WorkingDay implements Serializable {
 
-	// @Id
-	// @SequenceGenerator(name = "WorkingDay_Gen", sequenceName = "Working_Seq",
-	// allocationSize=1)
-	// @GeneratedValue(strategy=GenerationType.SEQUENCE, generator =
-	// "workingDay_Gen")
-	// @Column(name = "id")
-	private int workingDayId;
-	// @Column(name = "start_time", columnDefinition = "TIMESTAMP")
+	@Id
+	@SequenceGenerator(name = "WorkingDay_Gen", sequenceName = "Working_Seq",
+	allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "workingDay_Gen")
+	@Column(name = "id")
+	private int id;
+	@Column(name = "start_time", columnDefinition = "TIMESTAMP")
 	private LocalDateTime start;
-	// @Column(name = "end_time" ,columnDefinition = "TIMESTAMP")
+	@Column(name = "end_time" ,columnDefinition = "TIMESTAMP")
 	private LocalDateTime end;
 
 	@Inject
+	@ManyToOne
+	@JoinColumn(name = "workerid")
 	private ExternalWorker worker;
 
 	// constructor
-
 	public WorkingDay() {
-		super();
+		
 	}
 
 	// getter and setters
-	
-	public int getWorkingDayId() {
-		return workingDayId;
-	}
-
-	public void setWorkingDayId(int workingDayId) {
-		this.workingDayId = workingDayId;
-	}
+	public int getId() {
+		return id;
+	}	
 
 
 	public LocalDateTime getStart() {
