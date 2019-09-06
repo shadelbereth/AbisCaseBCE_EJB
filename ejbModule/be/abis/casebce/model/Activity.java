@@ -115,12 +115,4 @@ public class Activity implements Serializable {
 	public void setActivityId(int activityId) {
 		this.activityId = activityId;
 	}
-
-	public static void main(String[] args) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exJPA");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction transaction = em.getTransaction();
-		transaction.begin();
-	}
-
 }
