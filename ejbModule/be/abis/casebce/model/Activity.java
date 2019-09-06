@@ -43,6 +43,7 @@ public class Activity implements Serializable {
 	@JoinColumn(name = "projectid")
 	private Project project;
 	@Inject
+	@Named("worker")
 	@ManyToOne
 	@JoinColumn(name = "performerid")
 	private Worker performer;
