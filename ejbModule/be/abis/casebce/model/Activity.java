@@ -2,7 +2,6 @@ package be.abis.casebce.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;

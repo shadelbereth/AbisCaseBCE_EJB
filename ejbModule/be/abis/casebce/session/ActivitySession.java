@@ -7,9 +7,6 @@ import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import be.abis.casebce.model.Activity;
@@ -80,7 +77,17 @@ public class ActivitySession implements ActivitySessionRemote {
 
 	@Override
 	public Activity createActivity(Activity activity) {
-		activities.add(activity);
+		try {
+			em.merge(activity.getPerformer());
+			em.merge(activity.getProject());
+			em.persist(activity);
+			
+			// test
+			System.out.println("From DB : Activity " + activity.getDescription()+" "+activity.getProject().getName()+" "+activity.getPerformer().getLogin());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return activity;
 	}
 
@@ -89,15 +96,4 @@ public class ActivitySession implements ActivitySessionRemote {
 		System.out.println("Reupload activity");
 		return activity;
 	}
-
-	@Override
-	public void test() {
-		try {
-			Company company = em.find(Company.class, 1);
-			System.out.println("From DB : " + company.getName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

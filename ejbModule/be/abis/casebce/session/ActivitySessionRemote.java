@@ -17,5 +17,4 @@ public interface ActivitySessionRemote {
 
 	public Activity reuploadActivity(Activity activity);
 
-	public void test();
 }
