@@ -27,14 +27,13 @@ import javax.persistence.Table;
 public class WorkingDay implements Serializable {
 
 	@Id
-	@SequenceGenerator(name = "WorkingDay_Gen", sequenceName = "Working_Seq",
-	allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "workingDay_Gen")
+	@SequenceGenerator(name = "WorkingDay_Gen", sequenceName = "WorkingDay_Seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "WorkingDay_Gen")
 	@Column(name = "id")
 	private int id;
 	@Column(name = "start_time", columnDefinition = "TIMESTAMP")
 	private LocalDateTime start;
-	@Column(name = "end_time" ,columnDefinition = "TIMESTAMP")
+	@Column(name = "end_time", columnDefinition = "TIMESTAMP")
 	private LocalDateTime end;
 
 	@Inject
@@ -44,19 +43,17 @@ public class WorkingDay implements Serializable {
 
 	// constructor
 	public WorkingDay() {
-		
+
 	}
 
 	// getter and setters
 	public int getId() {
 		return id;
-	}	
-
+	}
 
 	public LocalDateTime getStart() {
 		return start;
 	}
-
 
 	public void setStart(LocalDateTime start) {
 		this.start = start;
@@ -69,7 +66,7 @@ public class WorkingDay implements Serializable {
 	public void setEnd(LocalDateTime end) {
 		this.end = end;
 	}
-	
+
 	public ExternalWorker getWorker() {
 		return worker;
 	}

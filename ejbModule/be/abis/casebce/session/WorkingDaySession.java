@@ -3,8 +3,11 @@ package be.abis.casebce.session;
 import java.time.LocalDateTime;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import be.abis.casebce.model.ExternalWorker;
+import be.abis.casebce.model.Worker;
 import be.abis.casebce.model.WorkingDay;
 
 /**
@@ -13,6 +16,8 @@ import be.abis.casebce.model.WorkingDay;
 @Stateless
 public class WorkingDaySession implements WorkingDaySessionRemote {
 
+	@PersistenceContext(unitName = "CaseBCE")
+	private EntityManager em;
 	/**
 	 * Default constructor.
 	 */

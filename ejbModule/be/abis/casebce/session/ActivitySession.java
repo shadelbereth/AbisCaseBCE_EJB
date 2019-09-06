@@ -11,8 +11,10 @@ import javax.persistence.PersistenceContext;
 
 import be.abis.casebce.model.Activity;
 import be.abis.casebce.model.Company;
+import be.abis.casebce.model.ExternalWorker;
 import be.abis.casebce.model.Project;
 import be.abis.casebce.model.Worker;
+import be.abis.casebce.model.WorkingDay;
 
 /**
  * Session Bean implementation class ActivitySession
@@ -86,9 +88,6 @@ public class ActivitySession implements ActivitySessionRemote {
 			em.merge(activity.getPerformer());
 			em.merge(activity.getProject());
 			em.persist(activity);
-			
-			// test
-			System.out.println("From DB : Activity " + activity.getDescription()+" "+activity.getProject().getName()+" "+activity.getPerformer().getLogin());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,4 +100,6 @@ public class ActivitySession implements ActivitySessionRemote {
 		activity = em.find(Activity.class, activity.getActivityId());
 		return activity;
 	}
+	
+	
 }
