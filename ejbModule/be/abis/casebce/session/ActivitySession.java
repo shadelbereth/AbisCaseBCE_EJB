@@ -66,15 +66,20 @@ public class ActivitySession implements ActivitySessionRemote {
 		return performerActivities;
 	}
 
+
 	@Override
 	public Activity updateActivity(Activity activity) {
 		System.out.println("Activity updated");
-		List<Activity> workerActivities = getActivities(activity.getPerformer());
-		for (Activity activ : workerActivities) {
-			if (activ.getActivityId() == activity.getActivityId()) {
-				activ = activity;
-			}
-		}
+		em.merge(activity);
+//		
+//		List<Activity> workerActivities = getActivities(activity.getPerformer());
+//		for (Activity activ : workerActivities) {
+//			if (activ.getActivityId() == activity.getActivityId()) {
+//				activ = activity;
+//				
+//			}
+//		}
+//		
 		return activity;
 	}
 
