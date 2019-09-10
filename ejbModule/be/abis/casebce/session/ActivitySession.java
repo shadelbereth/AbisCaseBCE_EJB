@@ -65,26 +65,21 @@ public class ActivitySession implements ActivitySessionRemote {
 		return performerActivities;
 	}
 
-
 	@Override
 	public Activity updateActivity(Activity activity) {
-		System.out.println("Activity updated");
+		if (activity.getStart().isAfter(activity.getEnd())) {
+			return null;
+		}
 		em.merge(activity);
-//		
-//		List<Activity> workerActivities = getActivities(activity.getPerformer());
-//		for (Activity activ : workerActivities) {
-//			if (activ.getActivityId() == activity.getActivityId()) {
-//				activ = activity;
-//				
-//			}
-//		}
-//		
 		return activity;
 	}
 
 	@Override
 	public Activity createActivity(Activity activity) {
 		try {
+			if (activity.getStart().isAfter(activity.getEnd())) {
+				return null;
+			}
 			em.merge(activity.getPerformer());
 			em.merge(activity.getProject());
 			em.persist(activity);
@@ -100,6 +95,5 @@ public class ActivitySession implements ActivitySessionRemote {
 		activity = em.find(Activity.class, activity.getActivityId());
 		return activity;
 	}
-	
-	
+
 }
