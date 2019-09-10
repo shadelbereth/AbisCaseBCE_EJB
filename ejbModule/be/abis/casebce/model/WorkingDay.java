@@ -2,21 +2,18 @@ package be.abis.casebce.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoField;
 
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -43,7 +40,6 @@ public class WorkingDay implements Serializable {
 
 	// constructor
 	public WorkingDay() {
-
 	}
 
 	// getter and setters
@@ -73,5 +69,9 @@ public class WorkingDay implements Serializable {
 
 	public void setWorker(ExternalWorker worker) {
 		this.worker = worker;
+	}
+
+	public long getStartTimeInSeconds() {
+		return this.start.getLong(ChronoField.SECOND_OF_DAY);
 	}
 }
