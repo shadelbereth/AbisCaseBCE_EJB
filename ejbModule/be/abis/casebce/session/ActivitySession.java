@@ -1,20 +1,13 @@
 package be.abis.casebce.session;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import be.abis.casebce.model.Activity;
-import be.abis.casebce.model.Company;
-import be.abis.casebce.model.ExternalWorker;
-import be.abis.casebce.model.Project;
 import be.abis.casebce.model.Worker;
-import be.abis.casebce.model.WorkingDay;
 
 /**
  * Session Bean implementation class ActivitySession
