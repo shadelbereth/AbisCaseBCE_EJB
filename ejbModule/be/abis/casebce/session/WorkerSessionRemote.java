@@ -8,6 +8,5 @@ import be.abis.casebce.model.Worker;
 public interface WorkerSessionRemote {
 
 	public Worker getUser();
-	public void test();
 
 }
