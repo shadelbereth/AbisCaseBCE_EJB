@@ -12,7 +12,7 @@ import be.abis.casebce.model.Worker;
 /**
  * Session Bean implementation class ActivitySession
  */
-@Stateless
+@Stateless(name = "ActivitySession")
 public class ActivitySession implements ActivitySessionRemote {
 
 	@PersistenceContext(unitName = "CaseBCE")
@@ -26,10 +26,10 @@ public class ActivitySession implements ActivitySessionRemote {
 	}
 
 	@Override
-	public List<Activity> getActivities(Worker performer) {
+	public List<Activity> getActivities(int performerId) {
 		List<Activity> performerActivities = em
-				.createQuery("Select a From Activity a Where a.performer = :performer", Activity.class)
-				.setParameter("performer", performer).getResultList();
+				.createQuery("Select a From Activity a Where a.performer.id = :performerId", Activity.class)
+				.setParameter("performerId", performerId).getResultList();
 		return performerActivities;
 	}
 

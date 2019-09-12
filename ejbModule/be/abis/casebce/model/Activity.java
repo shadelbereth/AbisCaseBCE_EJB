@@ -19,6 +19,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Persistence;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import be.abis.casebce.converter.LocalDateTimeXmlAdapter;
 
 @Entity
 @Table(name = "Activity")
@@ -32,8 +35,10 @@ public class Activity implements Serializable {
 	@Column(name = "id")
 	private int activityId;
 	@Column(name = "start_time", columnDefinition = "TIMESTAMP")
+	@XmlJavaTypeAdapter(LocalDateTimeXmlAdapter.class)
 	private LocalDateTime start;
 	@Column(name = "end_time" ,columnDefinition = "TIMESTAMP")
+	@XmlJavaTypeAdapter(LocalDateTimeXmlAdapter.class)
 	private LocalDateTime end;
 	@Column(name = "description")
 	private String description;

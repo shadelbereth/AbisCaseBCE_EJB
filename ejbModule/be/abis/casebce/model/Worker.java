@@ -28,7 +28,7 @@ public class Worker implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
-	private int performerId;
+	private int id;
 	@Column(name = "login")
 	private String login;
 	@Column(name = "firstName")
@@ -42,12 +42,12 @@ public class Worker implements Serializable {
 	 * 
 	 * @Inject private Address address; private String password;
 	 */
-	public int getPerformerId() {
-		return performerId;
+	public int getId() {
+		return id;
 	}
 
-	public void setPerformerId(int performerId) {
-		this.performerId = performerId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getLogin() {

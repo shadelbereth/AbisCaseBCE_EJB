@@ -9,7 +9,7 @@ import be.abis.casebce.model.Worker;
 
 @Remote
 public interface ActivitySessionRemote {
-	public List<Activity> getActivities(Worker performer);
+	public List<Activity> getActivities(int performerId);
 
 	public Activity updateActivity(Activity activity);
 
