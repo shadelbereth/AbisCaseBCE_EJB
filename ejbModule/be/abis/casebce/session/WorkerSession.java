@@ -25,9 +25,9 @@ public class WorkerSession implements WorkerSessionRemote {
 	}
 
 	@Override
-	public Worker getUser() {
+	public Worker getUser(int id) {
 
-		return em.find(Worker.class, 1);
+		return em.find(Worker.class, id);
 	}
 
 }
