@@ -35,6 +35,17 @@ public class WorkingDay implements Serializable {
 	// constructor
 	public WorkingDay() {
 	}
+	
+	
+
+	public WorkingDay(LocalDateTime start, LocalDateTime end, ExternalWorker worker) {
+		super();
+		this.start = start;
+		this.end = end;
+		this.worker = worker;
+	}
+
+
 
 	// getter and setters
 	public int getId() {
