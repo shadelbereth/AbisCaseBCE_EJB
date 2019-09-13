@@ -58,8 +58,8 @@ public class ActivitySession implements ActivitySessionRemote {
 	}
 
 	@Override
-	public Activity reuploadActivity(Activity activity) {
-		activity = em.find(Activity.class, activity.getActivityId());
+	public Activity reuploadActivity(int activityId) {
+		Activity activity = em.find(Activity.class, activityId);
 		return activity;
 	}
 
