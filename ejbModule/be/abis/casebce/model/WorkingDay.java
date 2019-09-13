@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 
-import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,8 +16,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "WorkingDay")
-@Named
-@SessionScoped
 public class WorkingDay implements Serializable {
 
 	@Id
@@ -33,7 +28,6 @@ public class WorkingDay implements Serializable {
 	@Column(name = "end_time", columnDefinition = "TIMESTAMP")
 	private LocalDateTime end;
 
-	@Inject
 	@ManyToOne
 	@JoinColumn(name = "workerid")
 	private ExternalWorker worker;

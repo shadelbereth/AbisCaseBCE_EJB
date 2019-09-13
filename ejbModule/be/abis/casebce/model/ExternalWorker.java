@@ -1,7 +1,5 @@
 package be.abis.casebce.model;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 

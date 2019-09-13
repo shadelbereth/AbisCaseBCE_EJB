@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import be.abis.casebce.model.Activity;
-import be.abis.casebce.model.Worker;
 
 /**
  * Session Bean implementation class ActivitySession

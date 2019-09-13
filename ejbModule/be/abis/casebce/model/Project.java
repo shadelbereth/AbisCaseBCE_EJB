@@ -2,9 +2,6 @@ package be.abis.casebce.model;
 
 import java.io.Serializable;
 
-import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,8 +14,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Project")
-@Named
-@SessionScoped
 public class Project implements Serializable {
 
 	@Id
@@ -31,7 +26,6 @@ public class Project implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-	@Inject
 	@ManyToOne
 	@JoinColumn(name = "CompanyId")
 	private Company client;
