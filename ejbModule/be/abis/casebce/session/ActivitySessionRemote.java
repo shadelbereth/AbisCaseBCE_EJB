@@ -11,7 +11,7 @@ import be.abis.casebce.model.Worker;
 public interface ActivitySessionRemote {
 	public List<Activity> getActivities(int performerId);
 
-	public Activity updateActivity(Activity activity);
+	public Activity updateActivity(Activity activity) throws Exception;
 
 	public void createActivity(Activity activity);
 

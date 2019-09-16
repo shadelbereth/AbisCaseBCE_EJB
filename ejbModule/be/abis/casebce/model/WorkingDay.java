@@ -40,6 +40,10 @@ public class WorkingDay implements Serializable {
 		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public LocalDateTime getStart() {
 		return start;
 	}
