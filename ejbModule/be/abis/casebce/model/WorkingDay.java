@@ -2,7 +2,6 @@ package be.abis.casebce.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoField;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,17 +34,6 @@ public class WorkingDay implements Serializable {
 	// constructor
 	public WorkingDay() {
 	}
-	
-	
-
-	public WorkingDay(LocalDateTime start, LocalDateTime end, ExternalWorker worker) {
-		super();
-		this.start = start;
-		this.end = end;
-		this.worker = worker;
-	}
-
-
 
 	// getter and setters
 	public int getId() {
@@ -74,9 +62,5 @@ public class WorkingDay implements Serializable {
 
 	public void setWorker(ExternalWorker worker) {
 		this.worker = worker;
-	}
-
-	public long getStartTimeInSeconds() {
-		return this.start.getLong(ChronoField.SECOND_OF_DAY);
 	}
 }

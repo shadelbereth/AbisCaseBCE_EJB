@@ -6,9 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
-import be.abis.casebce.model.Activity;
 import be.abis.casebce.model.ExternalWorker;
 import be.abis.casebce.model.Worker;
 import be.abis.casebce.model.WorkingDay;
@@ -30,24 +28,26 @@ public class WorkingDaySession implements WorkingDaySessionRemote {
 
 	@Override
 
-	public WorkingDay getCurrentWorkingDay(ExternalWorker worker) {
+	public WorkingDay getCurrentWorkingDay(int workerId) {
 
 		// get last working day from db
-		List<WorkingDay> days = em.createQuery("SELECT w FROM WorkingDay w order by w.end desc", WorkingDay.class)
-				.setMaxResults(1).getResultList();
+		List<WorkingDay> days = em
+				.createQuery("SELECT w FROM WorkingDay w Where w.worker.id = :workerId order by w.end desc",
+						WorkingDay.class)
+				.setParameter("workerId", workerId).setMaxResults(1).getResultList();
 
 		WorkingDay day = days.get(0);
 
 		// if it is open return it
 		if (day.getEnd() == null) {
-			day.setWorker(worker);
 			return day;
 
 		} else {
 
 			// else create new one
+			Worker worker = day.getWorker();
 			day = new WorkingDay();
-			day.setWorker(worker);
+			day.setWorker((ExternalWorker)worker);
 			return day;
 		}
 	}
