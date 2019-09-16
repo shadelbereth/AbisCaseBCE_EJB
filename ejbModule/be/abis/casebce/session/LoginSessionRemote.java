@@ -1,6 +1,8 @@
 package be.abis.casebce.session;
 
+import be.abis.casebce.model.Worker;
+
 public interface LoginSessionRemote {
 
-	public String login(String login, String password);
+	public Worker login(String login, String password);
 }
