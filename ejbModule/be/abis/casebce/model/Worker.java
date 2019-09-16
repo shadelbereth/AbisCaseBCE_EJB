@@ -30,6 +30,8 @@ public class Worker implements Serializable {
 	private String firstName;
 	@Column(name = "lastName")
 	private String lastName;
+	@Column(name = "password")
+	private String password;
 
 	/*
 	 * 
@@ -67,6 +69,14 @@ public class Worker implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
