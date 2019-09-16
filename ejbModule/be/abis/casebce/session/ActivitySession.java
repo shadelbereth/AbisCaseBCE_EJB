@@ -42,19 +42,12 @@ public class ActivitySession implements ActivitySessionRemote {
 	}
 
 	@Override
-	public Activity createActivity(Activity activity) {
-		try {
-			if (activity.getStart().isAfter(activity.getEnd())) {
-				return null;
+	public void createActivity(Activity activity) {
+		if (!em.contains(activity)) {
+			if (!activity.getStart().isAfter(activity.getEnd())) {
+				em.persist(activity);
 			}
-			em.merge(activity.getPerformer());
-			em.merge(activity.getProject());
-			em.persist(activity);
-
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		return activity;
 	}
 
 	@Override
