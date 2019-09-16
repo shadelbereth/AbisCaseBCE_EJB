@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import be.abis.casebce.model.ExternalWorker;
-import be.abis.casebce.model.Worker;
 import be.abis.casebce.model.WorkingDay;
 
 /**
@@ -32,7 +31,7 @@ public class WorkingDaySession implements WorkingDaySessionRemote {
 
 		// get last working day from db
 		List<WorkingDay> days = em
-				.createQuery("SELECT w FROM WorkingDay w Where w.worker.id = :workerId order by w.end desc",
+				.createQuery("SELECT w FROM WorkingDay w Where w.worker.id = :workerId order by w.start desc",
 						WorkingDay.class)
 				.setParameter("workerId", workerId).setMaxResults(1).getResultList();
 
@@ -45,9 +44,9 @@ public class WorkingDaySession implements WorkingDaySessionRemote {
 		} else {
 
 			// else create new one
-			Worker worker = day.getWorker();
+			ExternalWorker worker = em.find(ExternalWorker.class, workerId);
 			day = new WorkingDay();
-			day.setWorker((ExternalWorker)worker);
+			day.setWorker(worker);
 			return day;
 		}
 	}
@@ -55,6 +54,7 @@ public class WorkingDaySession implements WorkingDaySessionRemote {
 	@Override
 	public WorkingDay startWorkingDay(WorkingDay workingDay) {
 		workingDay.setStart(LocalDateTime.now());
+		em.persist(workingDay);
 		return workingDay;
 	}
 
@@ -62,8 +62,7 @@ public class WorkingDaySession implements WorkingDaySessionRemote {
 	public WorkingDay closeWorkingDay(WorkingDay workingDay) {
 		workingDay.setEnd(LocalDateTime.now());
 		// merge into DB
-		em.merge(workingDay.getWorker());
-		em.persist(workingDay);
+		em.merge(workingDay);
 		// create new one to fill front end
 		WorkingDay day = new WorkingDay();
 		day.setWorker(workingDay.getWorker());
