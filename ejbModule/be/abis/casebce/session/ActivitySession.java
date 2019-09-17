@@ -33,12 +33,11 @@ public class ActivitySession implements ActivitySessionRemote {
 	}
 
 	@Override
-	public Activity updateActivity(Activity activity) throws Exception {
+	public void updateActivity(Activity activity) throws Exception {
 		if (activity.getStart().isAfter(activity.getEnd())) {
 			throw new Exception("Activity cannot be closed before it starts");
 		}
 		em.merge(activity);
-		return activity;
 	}
 
 	@Override

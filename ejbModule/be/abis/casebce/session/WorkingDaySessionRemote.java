@@ -2,7 +2,6 @@ package be.abis.casebce.session;
 
 import javax.ejb.Remote;
 
-import be.abis.casebce.model.ExternalWorker;
 import be.abis.casebce.model.WorkingDay;
 
 @Remote

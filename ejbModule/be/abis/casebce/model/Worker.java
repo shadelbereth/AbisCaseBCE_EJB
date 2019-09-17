@@ -37,12 +37,6 @@ public class Worker implements Serializable {
 	@Column(name = "password")
 	private String password;
 
-	/*
-	 * 
-	 * private String bankAcount;
-	 * 
-	 * @Inject private Address address; private String password;
-	 */
 	public int getId() {
 		return id;
 	}

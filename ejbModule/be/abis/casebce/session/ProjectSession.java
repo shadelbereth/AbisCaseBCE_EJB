@@ -13,7 +13,7 @@ public class ProjectSession implements ProjectSessionRemote {
 	@PersistenceContext(unitName = "CaseBCE")
 	private EntityManager em;
 
-	//Get all the projects
+	// Get all the projects
 	@Override
 	public List<Project> getProjects() {
 		List<Project> projects = em.createQuery("Select p From Project p", Project.class).getResultList();
