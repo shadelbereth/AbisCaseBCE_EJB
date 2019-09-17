@@ -42,12 +42,11 @@ public class ActivitySession implements ActivitySessionRemote {
 	}
 
 	@Override
-	public void createActivity(Activity activity) {
-		if (!em.contains(activity)) {
-			if (!activity.getStart().isAfter(activity.getEnd())) {
-				em.persist(activity);
-			}
+	public void createActivity(Activity activity) throws Exception {
+		if (activity.getStart().isAfter(activity.getEnd())) {
+			throw new Exception("Activity cannot be closed before it starts");
 		}
+		em.persist(activity);
 	}
 
 	@Override

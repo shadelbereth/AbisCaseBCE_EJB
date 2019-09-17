@@ -13,7 +13,7 @@ public interface ActivitySessionRemote {
 
 	public Activity updateActivity(Activity activity) throws Exception;
 
-	public void createActivity(Activity activity);
+	public void createActivity(Activity activity) throws Exception;
 
 	public Activity reuploadActivity(int activityId);
 
