@@ -20,6 +20,10 @@ import javax.persistence.Table;
 @DiscriminatorValue("WO")
 public class Worker implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2660533066843528102L;
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
