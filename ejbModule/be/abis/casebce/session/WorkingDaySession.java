@@ -30,25 +30,21 @@ public class WorkingDaySession implements WorkingDaySessionRemote {
 	public WorkingDay getCurrentWorkingDay(int workerId) {
 
 		// get last working day from db
-		List<WorkingDay> days = em
-				.createQuery("SELECT w FROM WorkingDay w Where w.worker.id = :workerId order by w.start desc",
-						WorkingDay.class)
-				.setParameter("workerId", workerId).setMaxResults(1).getResultList();
-
-		WorkingDay day = days.get(0);
-
+		WorkingDay day = null;
+		try {
+			day = em
+					.createQuery("SELECT w FROM WorkingDay w Where w.worker.id = :workerId order by w.start desc",
+							WorkingDay.class)
+					.setParameter("workerId", workerId).setMaxResults(1).getSingleResult();
+		} catch (Exception e) {
+			return this.generateNewWorkingDay(workerId);
+		}
 		// if it is open return it
 		if (day.getEnd() == null) {
 			return day;
-
-		} else {
-
-			// else create new one
-			ExternalWorker worker = em.find(ExternalWorker.class, workerId);
-			day = new WorkingDay();
-			day.setWorker(worker);
-			return day;
 		}
+		// else create new one
+		return this.generateNewWorkingDay(workerId);
 	}
 
 	@Override
@@ -64,8 +60,13 @@ public class WorkingDaySession implements WorkingDaySessionRemote {
 		// merge into DB
 		em.merge(workingDay);
 		// create new one to fill front end
+		return this.generateNewWorkingDay(workingDay.getWorker().getId());
+	}
+
+	private WorkingDay generateNewWorkingDay(int workerId) {
 		WorkingDay day = new WorkingDay();
-		day.setWorker(workingDay.getWorker());
+		ExternalWorker worker = em.find(ExternalWorker.class, workerId);
+		day.setWorker(worker);
 		return day;
 	}
 
